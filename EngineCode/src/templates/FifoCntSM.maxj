@@ -1,0 +1,65 @@
+/**
+ * Document: MaxCompiler Tutorial (maxcompiler-tutorial.pdf)
+ * Chapter: 8      Example: 3      Name: Two-dimensional average variable
+ * MaxFile name: CnnVolume
+ * Summary:
+ *      Kernel that averages within an 8-point window.
+ */
+
+package linebuffer;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelLib;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmInput;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmOutput;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmStateEnum;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmStateValue;
+import com.maxeler.maxcompiler.v2.statemachine.kernel.KernelStateMachine;
+import com.maxeler.maxcompiler.v2.statemachine.types.DFEsmValueType;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+
+
+
+class FifoCntSM extends KernelStateMachine {
+ 
+  // Constants
+
+  private final DFEsmInput write;
+  private final DFEsmInput read;
+  private final DFEsmOutput cnt;
+  
+  // State storage
+  private final DFEsmStateValue cnt1;
+
+  public FifoCntSM(KernelLib owner) {
+    super(owner);
+    
+    // Declare all types required to wire state machine
+    DFEsmValueType counterType = dfeUInt(32);
+    DFEsmValueType wireType = dfeBool();
+    
+    write = io.input("write", wireType);
+    read = io.input("read", wireType);
+    cnt = io.output("cnt", counterType);  
+
+    //initial state
+    cnt1 = state.value(counterType, 1);
+  }
+
+  @Override
+  protected void nextState() {
+    
+    IF (write & ~read) {
+      cnt1.next <== cnt1 + 1;
+    }
+    IF (~write & read & cnt1 >0) {
+      cnt1.next <== cnt1 - 1;
+    }
+  }
+  
+  @Override
+  protected void outputFunction() {
+    cnt <== cnt1;
+  }
+
+}

@@ -1,0 +1,270 @@
+Apache Ant version 1.7.1 compiled on August 24 2010
+Buildfile: CnnVolume.xml
+Detected Java version: 1.6 in: /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre
+Detected OS: Linux
+parsing buildfile /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume.xml with URI = file:/hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume.xml
+Project base dir set to: /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode
+[antlib:org.apache.tools.ant] Could not load definitions from resource org/apache/tools/ant/antlib.xml. It could not be found.
+ [property] Loading Environment env.
+Property "-*-command-variables-*-" has not been set
+Property "env.MAXCOMPILERJCP" has not been set
+Build sequence for target(s) `run' is [build, run]
+Complete build sequence is [build, run, help, clean, all, jar, ]
+
+build:
+Detected Java version: 1.6 in: /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre
+Detected OS: Linux
+      [ant] calling target(s) [default] in build file /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume_Build.xml
+parsing buildfile /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume_Build.xml with URI = file:/hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume_Build.xml
+Project base dir set to: /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode
+ [property] Loading Environment env.
+Property "-*-command-variables-*-" has not been set
+Property "env.MAXCOMPILERJCP" has not been set
+      [ant] Entering /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume_Build.xml...
+Build sequence for target(s) `all' is [clean, build, all]
+Complete build sequence is [clean, build, all, ]
+
+clean:
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/bk
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/bka
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/CnnVolumeManager.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/CnnVolumeKernel.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/ReaderKernel.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/ReadWriteSM$States.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/ReadWriteSM.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/WriterKernel.class
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist
+
+build:
+    [mkdir] Created dir: /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist
+    [mkdir] Created dir: /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin
+     [copy] linebuffer/bk added as linebuffer/bk doesn't exist.
+     [copy] linebuffer/bka added as linebuffer/bka doesn't exist.
+     [copy] Copying 2 files to /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin
+     [copy] Copying /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/bk to /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/bk
+     [copy] Copying /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/bka to /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin/linebuffer/bka
+[maxjcompiler] 
+[maxjcompiler] 
+[maxjcompiler] Compiling to folder /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin
+[maxjcompiler] 
+[maxjcompiler] Compiling files and folders:
+[maxjcompiler] /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src
+[maxjcompiler] 
+[maxjcompiler] Compiler options:
+[maxjcompiler] -noExit
+[maxjcompiler] -classpath
+[maxjcompiler] /opt/maxeler/maxcompiler-2014.1/lib/MaxCompiler.jar
+[maxjcompiler] -d
+[maxjcompiler] /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin
+[maxjcompiler] ----------
+[maxjcompiler] 1. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/CnnVolumeKernel.maxj (at line 19)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream is never used
+[maxjcompiler] ----------
+[maxjcompiler] 2. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/CnnVolumeKernel.maxj (at line 20)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes is never used
+[maxjcompiler] ----------
+[maxjcompiler] 3. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/CnnVolumeKernel.maxj (at line 97)
+[maxjcompiler] 	DFEVar tick = control.count.simpleCounter(32,1000);
+[maxjcompiler] 	       ^^^^
+[maxjcompiler] The local variable tick is never read
+[maxjcompiler] ----------
+[maxjcompiler] ----------
+[maxjcompiler] 4. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReaderKernelLib.maxj (at line 12)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters is never used
+[maxjcompiler] ----------
+[maxjcompiler] 5. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReaderKernelLib.maxj (at line 13)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr is never used
+[maxjcompiler] ----------
+[maxjcompiler] 6. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReaderKernelLib.maxj (at line 16)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain is never used
+[maxjcompiler] ----------
+[maxjcompiler] 7. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReaderKernelLib.maxj (at line 20)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream is never used
+[maxjcompiler] ----------
+[maxjcompiler] 8. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReaderKernelLib.maxj (at line 21)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes is never used
+[maxjcompiler] ----------
+[maxjcompiler] 9. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReaderKernelLib.maxj (at line 43)
+[maxjcompiler] 	DFEVar tick = control.count.simpleCounter(32,1000);
+[maxjcompiler] 	       ^^^^
+[maxjcompiler] The local variable tick is never read
+[maxjcompiler] ----------
+[maxjcompiler] ----------
+[maxjcompiler] 10. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReadWriteSM.maxj (at line 18)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar is never used
+[maxjcompiler] ----------
+[maxjcompiler] 11. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/ReadWriteSM.maxj (at line 19)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain is never used
+[maxjcompiler] ----------
+[maxjcompiler] ----------
+[maxjcompiler] 12. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/WriterKernelLib.maxj (at line 12)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters is never used
+[maxjcompiler] ----------
+[maxjcompiler] 13. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/WriterKernelLib.maxj (at line 13)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr is never used
+[maxjcompiler] ----------
+[maxjcompiler] 14. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/WriterKernelLib.maxj (at line 16)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain is never used
+[maxjcompiler] ----------
+[maxjcompiler] 15. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/WriterKernelLib.maxj (at line 20)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream is never used
+[maxjcompiler] ----------
+[maxjcompiler] 16. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/WriterKernelLib.maxj (at line 21)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes is never used
+[maxjcompiler] ----------
+[maxjcompiler] 17. WARNING in /hd/kunle/users/rdaly525/develop/cnnVolume/EngineCode/src/linebuffer/WriterKernelLib.maxj (at line 43)
+[maxjcompiler] 	DFEVar tick = control.count.simpleCounter(32,1000);
+[maxjcompiler] 	       ^^^^
+[maxjcompiler] The local variable tick is never read
+[maxjcompiler] ----------
+[maxjcompiler] 17 problems (17 warnings)
+
+all:
+      [ant] Exiting /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume_Build.xml.
+
+run:
+     [java] Executing '/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre/bin/java' with arguments:
+     [java] '-Xmx2048m'
+     [java] '-classpath'
+     [java] '/hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/dist/bin:/opt/maxeler/maxcompiler-2014.1/lib/MaxCompiler.jar'
+     [java] 'linebuffer.CnnVolumeManager'
+     [java] 
+     [java] The ' characters around the executable and arguments are
+     [java] not part of the command.
+     [java] Setting environment variable: MAXSOURCEDIRS=src
+     [java] Tue 22:03: MaxCompiler version: 2014.1
+     [java] Tue 22:03: Build "CnnVolume" start time: Tue Mar 01 22:03:29 PST 2016
+     [java] Tue 22:03: Main build process running as user rdaly525 on host max-2.Stanford.EDU
+     [java] Tue 22:03: Build location: /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/maxfiles/CnnVolume_VECTIS_DFE
+     [java] Tue 22:03: Detailed build log available in "_build.log"
+     [java] Tue 22:03: 
+     [java] Tue 22:03: ENGINE BUILD PARAMETERS
+     [java] Tue 22:03: 	 Build name: CnnVolume_VECTIS_DFE
+     [java] Tue 22:03: 	   DFEModel: VECTIS              
+     [java] Tue 22:03: 	maxFileName: CnnVolume           
+     [java] Tue 22:03: 	     target: DFE                 
+     [java] Tue 22:03: 	 enableMPCX: false               
+     [java] Tue 22:03: Instantiating kernel "CnnVolumeKernel"
+     [java] Tue 22:03: 
+     [java] Tue 22:03: Compiling kernel "CnnVolumeKernel"
+     [java] Tue 22:03: WARNING: Warning (UNCONNECTED_DESIGN_ELEMENT):
+     [java] Tue 22:03: WARNING: Unconnected elements in design 'CnnVolumeKernel'
+     [java] Tue 22:03: WARNING: details in : /hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/maxfiles/CnnVolume_VECTIS_DFE/scratch/CnnVolumeKernel_graph_warnings.txt
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 1/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 2/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 3/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 4/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 5/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 6/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 7/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 8/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 9/10
+     [java] Tue 22:03: WARNING: The license for ISE CANNOT be checked out
+     [java] Tue 22:03: WARNING: Unable to check out license for 'ISE' in attempt 10/10
+     [java] Tue 22:03: WARNING: Please check the output of  lmutil lmdiag -n ISE
+     [java] Tue 22:03: WARNING: The following environment variables may be involved in this issue:
+     [java] Tue 22:03: WARNING:  - XILINXD_LICENSE_FILE is not set
+     [java] Tue 22:03: WARNING:  - LM_LICENSE_FILE=:/opt/maxeler/maxcompiler-2014.1/lib/MaxCompilerQuartusLicense.dat
+     [java] Tue 22:03: ERROR: ----------------------------
+     [java] Tue 22:03: ERROR: Exception in thread "main":
+     [java] Tue 22:03: ERROR:  
+     [java] Tue 22:03: ERROR:   Error in MaxDC pass processing node created via:
+     [java] Tue 22:03: ERROR:   com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:956)
+     [java] Tue 22:03: ERROR:   linebuffer.CnnVolumeKernel.<init>(CnnVolumeKernel.maxj:81)
+     [java] Tue 22:03: ERROR:   linebuffer.CnnVolumeManager.<init>(CnnVolumeManager.maxj:58)
+     [java] Tue 22:03: ERROR:   linebuffer.CnnVolumeManager.main(CnnVolumeManager.maxj:143)
+     [java] Tue 22:03: ERROR:   
+     [java] Tue 22:03: ERROR:   -> (WARNING: unlogged MaxelerException) 
+     [java] Tue 22:03: ERROR:   com.maxeler.licensing.external_tools.LicenseError: Licenses cannot be checked 
+     [java] Tue 22:03: ERROR:   out for ISE
+     [java] Tue 22:03: ERROR: 
+     [java] Tue 22:03: ERROR: Exception Stack Trace com.maxeler.photon.core.PhotonException: 
+     [java] Tue 22:03: ERROR:    at com.maxeler.licensing.external_tools.CheckXilinxLicenses.check(CheckXilinxLicenses.java:115)
+     [java] Tue 22:03: ERROR:    at com.maxeler.licensing.external_tools.CheckXilinxLicenses.check(CheckXilinxLicenses.java:59)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxdc.xilinx.coregen.CoregenComponent.<init>(CoregenComponent.java:43)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxdc.xilinx.coregen.CGFixedMultiplier_base.<init>(CGFixedMultiplier_base.java:37)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxdc.xilinx.coregen.CGFixedMultiplier_112.<init>(CGFixedMultiplier_112.java:32)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.hw.xilinx.CGFixedMultiplierWrapper.<init>(CGFixedMultiplierWrapper.java:67)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.hw.xilinx.CGFixOperatorFactory.getNodeEntityForMul(CGFixOperatorFactory.java:137)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.hw.FixOperatorFactory.getNodeEntityForMul(FixOperatorFactory.java:1)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.op_management.OperatorSupplier._getNodeEntityForOp(OperatorSupplier.java:447)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.op_management.OperatorSupplier.getNodeEntityForOp(OperatorSupplier.java:486)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.nodes.NodeBinaryOp.make(NodeBinaryOp.java:278)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.graph_passes.maxdc_gen.PhotonMaxDCEntity.instantiateNode(PhotonMaxDCEntity.java:1171)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.graph_passes.maxdc_gen.PhotonMaxDCEntity.makeNode(PhotonMaxDCEntity.java:1488)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.graph_passes.maxdc_gen.PhotonMaxDCTopEntity.processNode(PhotonMaxDCTopEntity.java:255)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.core.GraphPassRunner.run(GraphPassRunner.java:432)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.core.GraphPassRunner.run(GraphPassRunner.java:489)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.core.PhotonCompileManager.runGraphPass(PhotonCompileManager.java:166)
+     [java] Tue 22:03: ERROR:    at com.maxeler.photon.compile_managers.MaxDCCompileManager.buildPhotonSBA(MaxDCCompileManager.java:114)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxeleros.managercompiler.nodes.WrapperNodePhoton.build(WrapperNodePhoton.java:446)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxeleros.managercompiler.core.WrapperDesignEntity.<init>(WrapperDesignEntity.java:81)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxeleros.managercompiler.core.WrapperCompileManager.build(WrapperCompileManager.java:282)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxcompiler.v2.managers.custom.CustomManager.buildInternal(CustomManager.java:911)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxcompiler.v2.managers.custom.CustomManager.realBuild(CustomManager.java:1436)
+     [java] Tue 22:03: ERROR:    at com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:357)
+     [java] Tue 22:03: ERROR:    at linebuffer.CnnVolumeManager.main(CnnVolumeManager.maxj:153)
+     [java] Tue 22:03: ERROR: ----------------------------
+
+BUILD FAILED
+/hd/kunle/users/rdaly525/develop/cnnVolume/RunRules/DFE/CnnVolume.xml:22: Java returned: 1
+	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:622)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1337)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1306)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1189)
+	at org.apache.tools.ant.Main.runBuild(Main.java:758)
+	at org.apache.tools.ant.Main.startAnt(Main.java:217)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+
+Total time: 13 seconds

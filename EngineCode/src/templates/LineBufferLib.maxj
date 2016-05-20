@@ -1,0 +1,217 @@
+/**
+ * Document: MaxCompiler Tutorial (maxcompiler-tutorial.pdf)
+ * Chapter: 8      Example: 3      Name: Two-dimensional average variable
+ * MaxFile name: LineBufferLib
+ * Summary:
+ *      Kernel that averages within an 8-point window.
+ */
+
+package linebuffer;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelLib;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Count;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Count.Counter;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.SMIO;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.memory.Queue;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Mem;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+
+
+class LineBuffer extends KernelLib {
+  
+
+
+  static int FIFO_SIZE = 64;
+  int nxMax;
+  int kH;
+  int kW;
+  int padH;
+  int padW;
+  int stride;
+
+  public LineBuffer(KernelLib owner,
+    int _nxMax, int _kH, int _kW, 
+    int _padH, int _padW, int _stride
+  ) {
+    super(owner);
+    nxMax = _nxMax;
+    kH = _kH;
+    kW = _kW;
+    padH = _padH;
+    padW = _padW;
+    stride = _stride;
+  }
+   
+
+
+
+
+  public void padKernel(
+    DFEVar inH, DFEVar inW,
+    DFEVar us_data, DFEVar us_ready, 
+    DFEVar ds_data,
+    DFEVar running
+  ) {
+
+      DFEVar outH = inH + (padH<<1);
+      DFEVar outW = inW + (padW<<1);
+      
+      Count.Params paramsWi = control.count.makeParams(32)
+        .withMax(outW)
+        .withEnable(running);
+      Counter countWi = control.count.makeCounter(paramsWi);
+      DFEVar wi = countWi.getCount();
+      Count.Params paramsHi = control.count.makeParams(32)
+        .withMax(outH)
+        .withEnable(countWi.getWrap());
+      Counter countHi = control.count.makeCounter(paramsHi);
+      DFEVar hi = countHi.getCount();
+
+      DFEVar readX = (wi >= padW) & (wi < outW-padW);
+      DFEVar readY = (hi >= padH) & (hi < outH-padH);
+      
+      DFEVar readXY = readX & readY;
+      us_ready <== readXY;
+      ds_data <== readXY ? us_data : 0;
+  }
+  
+  public DFEVar[] getStencil(
+    int nxMax, int kH, int kW, int stride,
+    DFEVar H, DFEVar W, 
+    DFEVar us_data,
+    DFEVar ds_valid,
+    DFEVar running
+  ) {
+    
+    
+    OffsetExpr NX = stream.makeOffsetParam("NX", 3, nxMax);
+    DFEVar inStream = us_data;
+
+    DFEVar[] stencil = new DFEVar[kH*kW];
+    int i = 0;
+    for (int h=0; h<kH; h++)
+      for (int w=0; w<kW; w++)
+        stencil[i++] = stream.offset(inStream, h*NX+w);
+      
+    Count.Params paramsWi = control.count.makeParams(32)
+      .withMax(W)
+      .withEnable(running);
+    Counter countWi = control.count.makeCounter(paramsWi);
+    DFEVar wi = countWi.getCount();
+    Count.Params paramsHi = control.count.makeParams(32)
+      .withMax(H)
+      .withEnable(countWi.getWrap());
+    Counter countHi = control.count.makeCounter(paramsHi);
+    DFEVar hi = countHi.getCount();
+  
+    ds_valid <== running & (hi <= H-kH) & (wi <= W-kW) & ((stride==1) | (wi[0]===0 & hi[0]===0));
+    return stencil;
+  }
+
+
+  DFEVar[] doIt(
+    DFEVar inH, DFEVar inW,
+    DFEVar us_data, DFEVar us_en, DFEVar us_done,
+    DFEVar ds_en, DFEVar ds_done,
+    DFEVar master_en, DFEVar master_done
+  ) {
+
+    DFEVar paddedH = inH + 2*padH;
+    DFEVar paddedW = inW + 2*padW;
+    DFEVar outH = inH + (padH<<1);
+    DFEVar outW = inW + (padW<<1);
+    
+    DFEVar running = dfeBool().newInstance(this);
+
+    // translation from en/done to valid/ready
+    DFEVar us_ready = dfeBool().newInstance(this);
+    us_done <== ~us_ready;
+    DFEVar us_valid = us_en;
+
+
+    DFEVar infifo2pad_data = dfeFloat(8,24).newInstance(this);
+    //DFEVar infifo2pad_valid = dfeBool().newInstance(this);
+    DFEVar infifo2pad_ready = dfeBool().newInstance(this);
+
+    Queue<DFEVar> infifo = mem.queue(dfeFloat(8,24),FIFO_SIZE);
+    infifo.insert(us_data, us_valid);
+    infifo2pad_data <== infifo.remove(infifo2pad_ready);
+    
+    DFEVar incnt = dfeUInt(32).newInstance(this);
+    SMIO incntSM = addStateMachine("incntSM", new FifoCntSM(this));
+    incntSM.connectInput("write",us_valid.cast(dfeBool()));
+    incntSM.connectInput("read",infifo2pad_ready.cast(dfeBool()));
+    incnt <== incntSM.getOutput("cnt");
+    us_ready <== (incnt < infifo.capacity()-4);
+
+
+    DFEVar pad2stencil_data = dfeFloat(8,24).newInstance(this);
+
+    padKernel(
+      inH, inW, 
+      infifo2pad_data, infifo2pad_ready,
+      pad2stencil_data,
+      running
+    );
+    
+    
+    DFEVar stencil2outfifo_valid = dfeBool().newInstance(this);
+    DFEVar stencil2outfifo_ready = dfeBool().newInstance(this);
+   
+    DFEVar ds_valid = dfeBool().newInstance(this);
+    DFEVar ds_ready = dfeBool().newInstance(this);
+
+    DFEVar[] stencil2outfifo_data = getStencil(
+      nxMax,kH,kW,stride,
+      paddedH,paddedW,
+      pad2stencil_data,
+      stencil2outfifo_valid,
+      running
+    );
+    
+    DFEVar[] ds_data = new DFEVar[kH*kW];
+
+    Queue<DFEVar>[] outfifo = new Queue[kH*kW];
+    for(int i=0; i<kH*kW; i++) {
+      outfifo[i] = mem.queue(dfeFloat(8,24),FIFO_SIZE);
+      outfifo[i].insert(stencil2outfifo_data[i], stencil2outfifo_valid);
+      ds_data[i] = outfifo[i].remove(ds_ready);
+    }
+    
+
+    debug.simPrintf("2outfifo_valid=%d, ds_ready=%d\n",stencil2outfifo_valid,ds_ready);
+    //ds_valid <== (outcnt > 0);
+    ds_valid <== ~outfifo[0].underflow();
+
+    //translate from valid/ready to en/done
+    ds_ready <== ~ds_done;
+    ds_en <== ds_valid;
+
+    // End data path
+
+
+    DFEVar out_size = outH*outW;
+    //DFEVar infifo_full = incnt > (outW*(outH>>1));
+    
+    //State machine
+    SMIO masterSM = addStateMachine("masterSM", new LineBufferSM(this));
+    masterSM.connectInput("master_en",master_en.cast(dfeBool()));
+    masterSM.connectInput("out_size",out_size);
+    //masterSM.connectInput("infifo_full",infifo_full);
+    master_done <== masterSM.getOutput("master_done");
+    running <== masterSM.getOutput("running");
+
+
+
+
+
+    return ds_data;
+  }
+
+}

@@ -1,0 +1,103 @@
+/**
+ * Document: MaxCompiler Tutorial (maxcompiler-tutorial.pdf)
+ * Chapter: 8      Example: 3      Name: Two-dimensional average variable
+ * MaxFile name: CnnVolume
+ * Summary:
+ *      Kernel that averages within an 8-point window.
+ */
+
+package linebuffer;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelLib;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmInput;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmOutput;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmStateEnum;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmStateValue;
+import com.maxeler.maxcompiler.v2.statemachine.kernel.KernelStateMachine;
+import com.maxeler.maxcompiler.v2.statemachine.types.DFEsmValueType;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+
+
+
+class LineBufferSM extends KernelStateMachine {
+ 
+  
+  //states
+  enum States {
+    IDLE,
+    FWAIT,
+    RUNNING
+  }
+
+  // Constants
+
+  private final DFEsmInput master_en;
+  private final DFEsmInput out_size;
+  //private final DFEsmInput infifo_full;
+  private final DFEsmOutput master_done;
+  private final DFEsmOutput running;
+  
+  // State storage
+  private final DFEsmStateEnum<States> stateFF;
+  private final DFEsmStateValue cnt;
+
+
+  public LineBufferSM(KernelLib owner) {
+    super(owner);
+    // Declare all types required to wire state machine
+    DFEsmValueType counterType = dfeUInt(32);
+    DFEsmValueType wireType = dfeBool();
+    
+
+    // MaxJ is complaining about invalid loops which are FALSE.
+    // There are loops in the design, but they are not combinational. Fucking piece of shit
+    // Making just a large counter
+
+ 
+    master_en = io.input("master_en", wireType);  
+    out_size = io.input("out_size", counterType);  
+    //infifo_full = io.input("infifo_full", wireType);
+    master_done = io.output("master_done", wireType);  
+    running = io.output("running", wireType);  
+
+    //initial state
+    stateFF = state.enumerated(States.class, States.IDLE);
+    cnt = state.value(counterType, 0);
+  }
+
+  // Seriously, it will not let me do anything dependent on anything else in the design becasue MaxJ sucks multiple bags of dicks.
+  // Fuck this shit. I want to wait for the infifo to fill a bit because downstream needs a constant stream of valid data. Now I am just waiting an arbitraty amount of time. Should really depend on the fifo count. 
+
+
+  @Override
+  protected void nextState() {
+    SWITCH(stateFF) {
+      CASE(States.IDLE) {
+        IF (master_en) {
+          stateFF.next <== States.FWAIT;
+        }
+      }
+      CASE(States.FWAIT) {
+        cnt.next <== cnt + 1;
+        IF (cnt >= (out_size>>1)) {
+          stateFF.next <== States.RUNNING;
+        }
+      }
+      CASE(States.RUNNING) {
+        cnt.next <== cnt + 1;
+        IF (cnt >= (out_size<<1)) {
+          stateFF.next <== States.IDLE;
+          cnt.next <== 0;
+        }
+      }
+    }
+  }
+  
+  @Override
+  protected void outputFunction() {
+    running <== (stateFF === States.RUNNING);
+    master_done <== (stateFF === States.IDLE);
+  }
+
+}

@@ -1,0 +1,186 @@
+Apache Ant version 1.7.1 compiled on August 24 2010
+Buildfile: LineBuffer.xml
+Detected Java version: 1.6 in: /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre
+Detected OS: Linux
+parsing buildfile /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer.xml with URI = file:/hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer.xml
+Project base dir set to: /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode
+[antlib:org.apache.tools.ant] Could not load definitions from resource org/apache/tools/ant/antlib.xml. It could not be found.
+ [property] Loading Environment env.
+Property "-*-command-variables-*-" has not been set
+Property "env.MAXCOMPILERJCP" has not been set
+Build sequence for target(s) `run' is [build, run]
+Complete build sequence is [build, run, help, clean, all, jar, ]
+
+build:
+Detected Java version: 1.6 in: /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre
+Detected OS: Linux
+      [ant] calling target(s) [default] in build file /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer_Build.xml
+parsing buildfile /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer_Build.xml with URI = file:/hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer_Build.xml
+Project base dir set to: /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode
+ [property] Loading Environment env.
+Property "-*-command-variables-*-" has not been set
+Property "env.MAXCOMPILERJCP" has not been set
+      [ant] Entering /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer_Build.xml...
+Build sequence for target(s) `all' is [clean, build, all]
+Complete build sequence is [clean, build, all, ]
+
+clean:
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer/LineBufferManager.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer/LineBufferKernel.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer/ReaderKernel.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer/ReadWriteSM.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer/ReadWriteSM$States.class
+   [delete] Deleting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer/WriterKernel.class
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin/linebuffer
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin
+   [delete] Deleting directory /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist
+
+build:
+    [mkdir] Created dir: /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist
+    [mkdir] Created dir: /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin
+     [copy] No sources found.
+[maxjcompiler] 
+[maxjcompiler] 
+[maxjcompiler] Compiling to folder /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin
+[maxjcompiler] 
+[maxjcompiler] Compiling files and folders:
+[maxjcompiler] /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src
+[maxjcompiler] 
+[maxjcompiler] Compiler options:
+[maxjcompiler] -noExit
+[maxjcompiler] -classpath
+[maxjcompiler] /opt/maxeler/maxcompiler-2014.1/lib/MaxCompiler.jar
+[maxjcompiler] -d
+[maxjcompiler] /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin
+[maxjcompiler] ----------
+[maxjcompiler] 1. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/engine/LineBufferKernel.maxj (at line 19)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream is never used
+[maxjcompiler] ----------
+[maxjcompiler] 2. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/engine/LineBufferKernel.maxj (at line 20)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes is never used
+[maxjcompiler] ----------
+[maxjcompiler] 3. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/engine/LineBufferKernel.maxj (at line 97)
+[maxjcompiler] 	DFEVar tick = control.count.simpleCounter(32,1000);
+[maxjcompiler] 	       ^^^^
+[maxjcompiler] The local variable tick is never read
+[maxjcompiler] ----------
+[maxjcompiler] ----------
+[maxjcompiler] 4. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReaderKernelLib.maxj (at line 12)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters is never used
+[maxjcompiler] ----------
+[maxjcompiler] 5. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReaderKernelLib.maxj (at line 13)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr is never used
+[maxjcompiler] ----------
+[maxjcompiler] 6. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReaderKernelLib.maxj (at line 16)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain is never used
+[maxjcompiler] ----------
+[maxjcompiler] 7. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReaderKernelLib.maxj (at line 20)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream is never used
+[maxjcompiler] ----------
+[maxjcompiler] 8. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReaderKernelLib.maxj (at line 21)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes is never used
+[maxjcompiler] ----------
+[maxjcompiler] 9. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReaderKernelLib.maxj (at line 43)
+[maxjcompiler] 	DFEVar tick = control.count.simpleCounter(32,1000);
+[maxjcompiler] 	       ^^^^
+[maxjcompiler] The local variable tick is never read
+[maxjcompiler] ----------
+[maxjcompiler] ----------
+[maxjcompiler] 10. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReadWriteSM.maxj (at line 18)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar is never used
+[maxjcompiler] ----------
+[maxjcompiler] 11. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/ReadWriteSM.maxj (at line 19)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain is never used
+[maxjcompiler] ----------
+[maxjcompiler] ----------
+[maxjcompiler] 12. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/WriterKernelLib.maxj (at line 12)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters is never used
+[maxjcompiler] ----------
+[maxjcompiler] 13. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/WriterKernelLib.maxj (at line 13)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr is never used
+[maxjcompiler] ----------
+[maxjcompiler] 14. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/WriterKernelLib.maxj (at line 16)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain is never used
+[maxjcompiler] ----------
+[maxjcompiler] 15. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/WriterKernelLib.maxj (at line 20)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.LMemCommandStream is never used
+[maxjcompiler] ----------
+[maxjcompiler] 16. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/WriterKernelLib.maxj (at line 21)
+[maxjcompiler] 	import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+[maxjcompiler] 	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[maxjcompiler] The import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes is never used
+[maxjcompiler] ----------
+[maxjcompiler] 17. WARNING in /hd/kunle/users/rdaly525/develop/lineBuffer/EngineCode/src/templates/WriterKernelLib.maxj (at line 43)
+[maxjcompiler] 	DFEVar tick = control.count.simpleCounter(32,1000);
+[maxjcompiler] 	       ^^^^
+[maxjcompiler] The local variable tick is never read
+[maxjcompiler] ----------
+[maxjcompiler] 17 problems (17 warnings)
+
+all:
+      [ant] Exiting /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/LineBuffer_Build.xml.
+
+run:
+     [java] Executing '/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre/bin/java' with arguments:
+     [java] '-Xmx2048m'
+     [java] '-classpath'
+     [java] '/hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/dist/bin:/opt/maxeler/maxcompiler-2014.1/lib/MaxCompiler.jar'
+     [java] 'linebuffer.LineBufferManager'
+     [java] 
+     [java] The ' characters around the executable and arguments are
+     [java] not part of the command.
+     [java] Setting environment variable: MAXSOURCEDIRS=src
+     [java] Tue 22:28: MaxCompiler version: 2014.1
+     [java] Tue 22:28: Build "LineBuffer" start time: Tue Apr 12 22:28:24 PDT 2016
+     [java] Tue 22:28: Main build process running as user rdaly525 on host max-2.Stanford.EDU
+     [java] Tue 22:28: Build location: /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/maxfiles/LineBuffer_VECTIS_DFE_SIM
+     [java] Tue 22:28: Detailed build log available in "_build.log"
+     [java] Tue 22:28: 
+     [java] Tue 22:28: ENGINE BUILD PARAMETERS
+     [java] Tue 22:28: 	 Build name: LineBuffer_VECTIS_DFE_SIM
+     [java] Tue 22:28: 	   DFEModel: VECTIS                   
+     [java] Tue 22:28: 	maxFileName: LineBuffer               
+     [java] Tue 22:28: 	     target: DFE_SIM                  
+     [java] Tue 22:28: 	 enableMPCX: false                    
+     [java] Tue 22:28: Instantiating kernel "LineBufferKernel"
+     [java] Tue 22:28: 
+     [java] Tue 22:28: Compiling kernel "LineBufferKernel"
+     [java] Tue 22:28: WARNING: Warning (UNCONNECTED_DESIGN_ELEMENT):
+     [java] Tue 22:28: WARNING: Unconnected elements in design 'LineBufferKernel'
+     [java] Tue 22:28: WARNING: details in : /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/maxfiles/LineBuffer_VECTIS_DFE_SIM/scratch/LineBufferKernel_graph_warnings.txt
+     [java] Tue 22:28: Running back-end simulation build (3 phases)
+     [java] Tue 22:28: (1/3) - Prepare MaxFile Data (GenerateMaxFileDataFile)
+     [java] Tue 22:28: (2/3) - Compile Simulation Modules (SimCompilePass)
+     [java] Tue 22:28: (3/3) - Generate MaxFile (AddSimObjectToMaxFilePass)
+     [java] Tue 22:28: MaxFile: /hd/kunle/users/rdaly525/develop/lineBuffer/RunRules/Simulation/maxfiles/LineBuffer_VECTIS_DFE_SIM/results/LineBuffer.max (MD5Sum: 363339a464c29dddca9bd3ecc3bd366d)
+     [java] Tue 22:28: Build completed: Tue Apr 12 22:28:48 PDT 2016 (took 23 secs)
+
+BUILD SUCCESSFUL
+Total time: 24 seconds

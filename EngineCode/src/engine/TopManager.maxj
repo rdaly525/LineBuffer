@@ -1,0 +1,152 @@
+/**
+ * Document: MaxCompiler Tutorial (maxcompiler-tutorial.pdf)
+ * Chapter: 8      Example: 3      Name: Two-dimensional average variable
+ * MaxFile name: TopManager
+ * Summary:
+ *       Manager for kernel that averages within an 8-point window.
+ */
+package linebuffer;
+
+import com.maxeler.maxcompiler.v2.managers.custom.blocks.KernelBlock;
+import com.maxeler.maxcompiler.v2.build.EngineParameters;
+//import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+//import com.maxeler.maxcompiler.v2.managers.standard.Manager;
+//import com.maxeler.maxcompiler.v2.managers.standard.Manager.MemAccessPattern;
+//import com.maxeler.maxcompiler.v2.managers.standard.Manager.IOType;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.EngineInterface;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.EngineInterface.Direction;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.InterfaceParam;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+import com.maxeler.maxcompiler.v2.managers.custom.CustomManager;
+import com.maxeler.maxcompiler.v2.managers.custom.DFELink;
+//import com.maxeler.maxcompiler.v2.managers.custom.stdlib.DebugLevel;
+//import com.maxeler.maxcompiler.v2.managers.BuildConfig;
+//import com.maxeler.maxcompiler.v2.managers.custom.stdlib.MemoryControllerConfig;
+//import com.maxeler.maxcompiler.v2.kernelcompiler.KernelConfiguration;
+//import com.maxeler.maxcompiler.v2.kernelcompiler.KernelConfiguration.OptimizationOptions;
+//import com.maxeler.maxcompiler.v2.kernelcompiler.KernelConfiguration.OptimizationOptions.OptimizationTechnique;
+import com.maxeler.maxcompiler.v2.managers.custom.stdlib.MemoryControlGroup;
+
+
+//import com.maxeler.maxcompiler.v2.build.EngineParameters;
+//import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+//import com.maxeler.maxcompiler.v2.managers.standard.Manager;
+//import com.maxeler.maxcompiler.v2.managers.standard.Manager.IOType;
+//import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+//import com.maxeler.maxcompiler.v2.managers.engine_interfaces.EngineInterface;
+//import com.maxeler.maxcompiler.v2.managers.engine_interfaces.InterfaceParam;
+
+//import com.maxeler.maxcompiler.v2.managers.custom.CustomManager;
+//import com.maxeler.maxcompiler.v2.managers.custom.DFELink;
+//import com.maxeler.maxcompiler.v2.managers.custom.blocks.KernelBlock;
+
+class TopManager extends CustomManager {
+  
+  private static final CPUTypes U32 = CPUTypes.UINT32;
+  private static final CPUTypes FLOAT = CPUTypes.FLOAT;
+  
+  private static int nxMax = 4096;
+  private static int k = 3;
+  private static int pad = 1;
+  private static int stride = 1;
+  
+
+  private static float[] kernel = {0,1,0,1,2,1,0,1,0};
+
+  TopManager(EngineParameters engineParameters) {
+    super(engineParameters);
+
+    KernelBlock kern = addKernel(new TopKernel(makeKernelParameters("TopKernel"), nxMax,k,pad,stride,kernel));
+    
+    DFELink fromcpu = addStreamFromCPU("fromcpu");
+    DFELink tocpu = addStreamToCPU("tocpu");
+    DFELink fromlmem = addStreamFromOnCardMemory("fromlmem", MemoryControlGroup.MemoryAccessPattern.LINEAR_1D);
+    DFELink tolmem = addStreamToOnCardMemory("tolmem", MemoryControlGroup.MemoryAccessPattern.LINEAR_1D);
+    tolmem <== fromcpu;
+    tocpu <== fromlmem;
+   
+    //DFELink intrStream = addStreamToOnCardMemory("intrStream", kern.getOutput("intrCmd"));
+    //intrStream <== kern.getOutput("intrStream");
+
+    DFELink inData = addStreamFromOnCardMemory("inData", MemoryControlGroup.MemoryAccessPattern.LINEAR_1D);
+    kern.getInput("inData") <== inData;
+    
+    DFELink outData = addStreamToOnCardMemory("outData",MemoryControlGroup.MemoryAccessPattern.LINEAR_1D);
+    outData <== kern.getOutput("outData");
+    
+    //DFELink outData = addStreamToOnCardMemory("outData",kern.getOutput("outDataCmd"));
+    //outData <== kern.getOutput("outData");
+  }
+
+
+  private static EngineInterface interfaceRead(String name) {
+    EngineInterface ei = new EngineInterface(name);
+    InterfaceParam size = ei.addParam("size", U32);
+    InterfaceParam start = ei.addParam("start", U32);
+    InterfaceParam sizeInBytes = size;
+  
+
+    ei.setLMemLinear("fromlmem", start, sizeInBytes);
+    ei.setStream("tocpu", FLOAT, sizeInBytes);
+    ei.ignoreAll(Direction.IN_OUT);
+    return ei;
+  }
+  
+  private static EngineInterface interfaceWrite(String name) {
+    EngineInterface ei = new EngineInterface(name);
+    InterfaceParam size = ei.addParam("size", U32);
+    InterfaceParam start = ei.addParam("start", U32);
+    InterfaceParam sizeInBytes = size;
+
+    
+    ei.setLMemLinear("tolmem", start, sizeInBytes);
+    ei.setStream("fromcpu", FLOAT, sizeInBytes);
+    ei.ignoreAll(Direction.IN_OUT);
+    return ei;
+  }
+  
+  private static EngineInterface interfaceRoss() {
+    EngineInterface ei = new EngineInterface();
+    
+    InterfaceParam inH = ei.addParam("inH", U32);
+    InterfaceParam inW = ei.addParam("inW", U32);
+    InterfaceParam NX = ei.addParam("NX", U32);
+
+    InterfaceParam inBytes = ei.addParam("inBytes",U32);
+    InterfaceParam inAddr = ei.addParam("inAddr",U32);
+    InterfaceParam outBytes = ei.addParam("outBytes",U32);
+    InterfaceParam outAddr = ei.addParam("outAddr",U32);
+
+    InterfaceParam realInLen = inBytes/FLOAT.sizeInBytes();
+    InterfaceParam realOutLen = outBytes/FLOAT.sizeInBytes();
+
+    ei.setScalar("TopKernel", "inH", inH);
+    ei.setScalar("TopKernel", "inW", inW);
+    ei.setScalar("TopKernel", "realInLen", realInLen);
+    ei.setScalar("TopKernel", "realOutLen", realOutLen);
+    ei.setOffset("TopKernel", "NX", NX);
+    ei.setTicks("TopKernel", Long.MAX_VALUE);
+    ei.setLMemLinear("inData",inAddr,inBytes);
+    ei.setLMemLinear("outData",outAddr,outBytes);
+    //ei.setLMemInterruptOn("intrStream");
+    
+    ei.ignoreAll(Direction.IN_OUT);
+ 
+    return ei;
+  }
+
+  public static void main(String[] args) {
+    
+    TopManager m = new TopManager(new EngineParameters(args));
+
+    m.addMaxFileConstant("nxMax", nxMax);
+    m.addMaxFileConstant("k", k);
+    m.addMaxFileConstant("pad", pad);
+    m.addMaxFileConstant("stride", stride);
+    m.createSLiCinterface(interfaceRead("readLMem"));
+    m.createSLiCinterface(interfaceWrite("writeLMem"));
+    m.createSLiCinterface(interfaceRoss());
+
+    m.build();
+  }
+}

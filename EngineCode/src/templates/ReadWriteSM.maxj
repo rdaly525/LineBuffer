@@ -1,0 +1,95 @@
+/**
+ * Document: MaxCompiler Tutorial (maxcompiler-tutorial.pdf)
+ * Chapter: 8      Example: 3      Name: Two-dimensional average variable
+ * MaxFile name: CnnVolume
+ * Summary:
+ *      Kernel that averages within an 8-point window.
+ */
+
+package linebuffer;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelLib;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmInput;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmOutput;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmStateEnum;
+import com.maxeler.maxcompiler.v2.statemachine.DFEsmStateValue;
+import com.maxeler.maxcompiler.v2.statemachine.kernel.KernelStateMachine;
+import com.maxeler.maxcompiler.v2.statemachine.types.DFEsmValueType;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+
+
+
+class ReadWriteSM extends KernelStateMachine {
+ 
+
+  //states
+  enum States {
+    RUN,
+    ADJUST,
+    DONE
+  }
+
+  // Constants
+
+  private final DFEsmInput in_en;
+  private final DFEsmInput program_len;
+  private final DFEsmInput real_len;
+  private final DFEsmOutput out_en;
+  
+  // State storage
+  private final DFEsmStateEnum<States> stateFF;
+  private final DFEsmStateValue cnt1;
+  private final DFEsmStateValue cnt2;
+
+
+  public ReadWriteSM(KernelLib owner) {
+    super(owner);
+    // Declare all types required to wire state machine
+    DFEsmValueType counterType = dfeUInt(32);
+    DFEsmValueType wireType = dfeBool();
+    
+ 
+    program_len = io.input("program_len", counterType);
+    real_len = io.input("real_len", counterType);
+    in_en = io.input("in_en", wireType);  
+    out_en = io.output("out_en", wireType);  
+
+    //initial state
+    stateFF = state.enumerated(States.class, States.RUN);
+    cnt1 = state.value(counterType, 0);
+    cnt2 = state.value(counterType, 0);
+  }
+
+  @Override
+  protected void nextState() {
+    
+    SWITCH(stateFF) {
+      CASE(States.RUN) {
+        cnt2.next <== program_len;
+        IF (in_en) {
+          IF (cnt1 === program_len-1) {
+            stateFF.next <== States.ADJUST;
+          }
+          cnt1.next <== cnt1 + 1;
+        }
+      }
+      CASE(States.ADJUST) {
+        IF (cnt2 >= (real_len-1)) {
+          stateFF.next <== States.DONE;
+        }
+        cnt2.next <== cnt2 + 1;
+      }
+      CASE(States.DONE) {
+        stateFF.next <== States.DONE;
+      }
+    }
+  }
+  
+  @Override
+  protected void outputFunction() {
+    out_en <== (stateFF === States.RUN & in_en) | 
+              (stateFF === States.ADJUST & cnt2 < real_len);
+  }
+
+}
